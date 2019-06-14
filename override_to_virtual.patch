@@ -1,0 +1,157 @@
+diff --git a/VTK/Common/Core/vtkAOSDataArrayTemplate.h b/VTK/Common/Core/vtkAOSDataArrayTemplate.h
+index c242ded..6188b62 100644
+--- a/VTK/Common/Core/vtkAOSDataArrayTemplate.h
++++ b/VTK/Common/Core/vtkAOSDataArrayTemplate.h
+@@ -285,7 +285,7 @@ public:
+ 
+ protected:
+   vtkAOSDataArrayTemplate();
+-  ~vtkAOSDataArrayTemplate() override;
++  virtual ~vtkAOSDataArrayTemplate();
+ 
+   /**
+    * Allocate space for numTuples. Old data is not preserved. If numTuples == 0,
+diff --git a/VTK/Common/Core/vtkDenseArray.h b/VTK/Common/Core/vtkDenseArray.h
+index 5aff60d..3427012 100644
+--- a/VTK/Common/Core/vtkDenseArray.h
++++ b/VTK/Common/Core/vtkDenseArray.h
+@@ -111,7 +111,7 @@ public:
+   {
+   public:
+     HeapMemoryBlock(const vtkArrayExtents& extents);
+-    ~HeapMemoryBlock() override;
++    virtual ~HeapMemoryBlock();
+     T* GetAddress() override;
+   //@}
+ 
+@@ -177,7 +177,7 @@ public:
+ 
+ protected:
+   vtkDenseArray();
+-  ~vtkDenseArray() override;
++  virtual ~vtkDenseArray();
+ 
+ private:
+   vtkDenseArray(const vtkDenseArray&) = delete;
+diff --git a/VTK/Common/Core/vtkMappedDataArray.h b/VTK/Common/Core/vtkMappedDataArray.h
+index 88af6dc..c834270 100644
+--- a/VTK/Common/Core/vtkMappedDataArray.h
++++ b/VTK/Common/Core/vtkMappedDataArray.h
+@@ -124,7 +124,7 @@ public:
+ 
+ protected:
+   vtkMappedDataArray();
+-  ~vtkMappedDataArray() override;
++  virtual ~vtkMappedDataArray();
+ 
+   int GetArrayType() override
+   {
+diff --git a/VTK/Common/Core/vtkSOADataArrayTemplate.h b/VTK/Common/Core/vtkSOADataArrayTemplate.h
+index 580bf0a..ea4eb0b 100644
+--- a/VTK/Common/Core/vtkSOADataArrayTemplate.h
++++ b/VTK/Common/Core/vtkSOADataArrayTemplate.h
+@@ -221,7 +221,7 @@ public:
+ 
+ protected:
+   vtkSOADataArrayTemplate();
+-  ~vtkSOADataArrayTemplate() override;
++  virtual ~vtkSOADataArrayTemplate();
+ 
+   /**
+    * Allocate space for numTuples. Old data is not preserved. If numTuples == 0,
+diff --git a/VTK/Common/Core/vtkSparseArray.h b/VTK/Common/Core/vtkSparseArray.h
+index 0402622..24f8c24 100644
+--- a/VTK/Common/Core/vtkSparseArray.h
++++ b/VTK/Common/Core/vtkSparseArray.h
+@@ -212,7 +212,7 @@ public:
+ 
+ protected:
+   vtkSparseArray();
+-  ~vtkSparseArray() override;
++  virtual ~vtkSparseArray();
+ 
+ private:
+   vtkSparseArray(const vtkSparseArray&) = delete;
+diff --git a/VTK/Common/Core/vtkTypedDataArray.h b/VTK/Common/Core/vtkTypedDataArray.h
+index 6889ca8..1851c5e 100644
+--- a/VTK/Common/Core/vtkTypedDataArray.h
++++ b/VTK/Common/Core/vtkTypedDataArray.h
+@@ -163,7 +163,7 @@ public:
+ 
+ protected:
+   vtkTypedDataArray();
+-  ~vtkTypedDataArray() override;
++  virtual ~vtkTypedDataArray();
+ 
+   /**
+    * Needed for vtkGenericDataArray API, but just aborts. Override Allocate
+diff --git a/VTK/Common/DataModel/vtkAngularPeriodicDataArray.h b/VTK/Common/DataModel/vtkAngularPeriodicDataArray.h
+index 163b75e..a28d666 100644
+--- a/VTK/Common/DataModel/vtkAngularPeriodicDataArray.h
++++ b/VTK/Common/DataModel/vtkAngularPeriodicDataArray.h
+@@ -81,7 +81,7 @@ public:
+ 
+ protected:
+   vtkAngularPeriodicDataArray();
+-  ~vtkAngularPeriodicDataArray() override;
++  virtual ~vtkAngularPeriodicDataArray();
+ 
+   /**
+    * Transform the provided tuple
+diff --git a/VTK/Common/DataModel/vtkDispatcher_Private.h b/VTK/Common/DataModel/vtkDispatcher_Private.h
+index 71f0e7c..54a86df 100644
+--- a/VTK/Common/DataModel/vtkDispatcher_Private.h
++++ b/VTK/Common/DataModel/vtkDispatcher_Private.h
+@@ -126,7 +126,7 @@ public:
+   typedef typename Base::Parm1 Parm1;
+ 
+   FunctorHandler(Fun& fun) : f_(fun) {}
+-  ~FunctorHandler() override {}
++  virtual ~FunctorHandler() {}
+ 
+   ResultType operator()(Parm1& p1) override
+   { return f_(p1); }
+@@ -282,7 +282,7 @@ public:
+   typedef typename Base::Parm2 Parm2;
+ 
+   FunctorHandler(const Fun& fun) : f_(fun) {}
+-  ~FunctorHandler() override {}
++  virtual ~FunctorHandler() {}
+ 
+   ResultType operator()(Parm1& p1,Parm2& p2) override
+   { return f_(p1,p2); }
+diff --git a/VTK/Common/DataModel/vtkHyperTreeGrid.cxx b/VTK/Common/DataModel/vtkHyperTreeGrid.cxx
+index 34c3474..1946912 100644
+--- a/VTK/Common/DataModel/vtkHyperTreeGrid.cxx
++++ b/VTK/Common/DataModel/vtkHyperTreeGrid.cxx
+@@ -641,7 +641,7 @@ public:
+   static vtkVonNeumannSuperCursor<N>* New();
+ 
+   //---------------------------------------------------------------------------
+-  ~vtkVonNeumannSuperCursor() override
++  virtual ~vtkVonNeumannSuperCursor()
+   {
+     if ( this->Cursors )
+     {
+@@ -1109,7 +1109,7 @@ public:
+   static vtkMooreSuperCursor<N>* New();
+ 
+   //---------------------------------------------------------------------------
+-  ~vtkMooreSuperCursor() override
++  virtual ~vtkMooreSuperCursor()
+   {
+     if ( this->Cursors )
+     {
+diff --git a/VTK/Common/DataModel/vtkPeriodicDataArray.h b/VTK/Common/DataModel/vtkPeriodicDataArray.h
+index a96834b..59890d9 100644
+--- a/VTK/Common/DataModel/vtkPeriodicDataArray.h
++++ b/VTK/Common/DataModel/vtkPeriodicDataArray.h
+@@ -309,7 +309,7 @@ public:
+ 
+ protected:
+   vtkPeriodicDataArray();
+-  ~vtkPeriodicDataArray() override;
++  virtual ~vtkPeriodicDataArray();
+ 
+   //@{
+   /**

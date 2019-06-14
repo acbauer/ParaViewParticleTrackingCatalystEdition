@@ -1,0 +1,537 @@
+{
+  "edition": "Helios",
+  "requires": [
+    "Extras"
+  ],
+  "after": [
+    "Enable-Python"
+  ],
+  "cmake":{
+    "cache":[
+      {
+        "name":"Module_vtkPVVTKExtensionsCore",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      {
+        "name":"Module_vtkPVVTKExtensionsRendering",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      {
+        "name":"Module_vtkPVClientServerCoreDefault",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      {
+        "name":"Module_vtkPVClientServerCoreCore",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      {
+        "name":"Module_vtkPVClientServerCoreRendering",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      {
+        "name":"Module_vtkPVVTKExtensionsDefault",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      {
+        "name":"Module_vtkPVServerImplementationCore",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      {
+        "name":"Module_vtkIOParallel",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkImagingCore",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkFiltersParallelDIY2",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkIOLegacy",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkIOXML",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkIOParallelXML",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkFiltersGeometry",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkFiltersProgrammable",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkFiltersVerdict",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkFiltersParallel",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkFiltersAMR",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkjsoncpp",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkFiltersFlowPaths",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkFiltersParallelFlowPaths",
+        "type":"BOOL",
+        "value":"ON"
+      },
+      { "name":"Module_vtkFiltersSources",
+        "type":"BOOL",
+        "value":"ON"
+      }
+    ]
+  },
+  "modules":[
+    { "name":"vtkPVClientServerCoreDefault",
+      "path":"ParaViewCore/ClientServerCore/Default",
+      "include":[
+        { "class":"vtkPythonCalculator" }
+      ],
+      "replace": [
+        { "path":"ParaViewCore/ClientServerCore/Default/vtkPythonCalculator.h" },
+        { "path":"ParaViewCore/ClientServerCore/Default/module.cmake" },
+        { "path":"ParaViewCore/ClientServerCore/Default/CMakeLists.txt" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name":"vtkPVClientServerCoreRendering",
+      "path":"ParaViewCore/ClientServerCore/Rendering",
+      "include":[
+        { "class":"vtkClientServerMoveData" }
+      ],
+      "replace": [
+        { "path":"ParaViewCore/ClientServerCore/Rendering/module.cmake" },
+        { "path":"ParaViewCore/ClientServerCore/Rendering/CMakeLists.txt" }
+      ],
+      "cswrap":true,
+      "pythonwrap":false
+    },
+    { "name":"vtkPVVTKExtensionsDefault",
+      "path":"ParaViewCore/VTKExtensions/Default",
+      "include":[
+        { "class":"vtkInSituPParticlePathFilter" }
+      ],
+      "replace": [
+        { "path":"ParaViewCore/VTKExtensions/Default/module.cmake" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name":"vtkPVVTKExtensionsRendering",
+      "path":"ParaViewCore/VTKExtensions/Rendering",
+      "include":[
+        { "class":"vtkRedistributePolyData" },
+        { "class":"vtkWeightedRedistributePolyData" },
+        { "class":"vtkAllToNRedistributePolyData" }
+      ],
+      "replace": [
+        { "path":"ParaViewCore/VTKExtensions/Rendering/module.cmake" },
+        { "path":"ParaViewCore/VTKExtensions/Rendering/CMakeLists.txt" }
+      ],
+      "cswrap":false,
+      "pythonwrap":false
+    },
+    { "name":"vtkFiltersSources",
+      "path":"VTK/Filters/Sources",
+      "include":[
+        { "class":"vtkPointSource" }
+      ],
+      "replace":[
+        { "path":"VTK/Filters/Sources/module.cmake" },
+        { "path":"VTK/Filters/Sources/CMakeLists.txt" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name":"vtkFiltersGeneral",
+      "path":"VTK/Filters/General",
+      "include":[
+        { "class":"vtkOBBTree" },
+        { "class":"vtkGradientFilter" },
+        { "class":"vtkCellTreeLocator" },
+        { "class":"vtkCellDerivatives" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name":"vtkImagingCore",
+      "path":"VTK/Imaging/Core",
+      "include":[
+        { "class":"vtkExtractVOI" }
+      ],
+      "replace": [
+        { "path": "VTK/Imaging/Core/module.cmake" },
+        { "path": "VTK/Imaging/Core/CMakeLists.txt" }
+      ],
+      "cswrap":false,
+      "pythonwrap":false
+    },
+    { "name":"vtkFiltersExtraction",
+      "path":"VTK/Filters/Extraction",
+      "include":[
+        { "class":"vtkExtractGrid" },
+        { "class":"vtkExtractRectilinearGrid" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name":"vtkFiltersFlowPaths",
+      "path":"VTK/Filters/FlowPaths",
+      "include":[
+        { "class":"vtkAbstractInterpolatedVelocityField" },
+        { "class":"vtkAMRInterpolatedVelocityField" },
+        { "class":"vtkCachingInterpolatedVelocityField" },
+        { "class":"vtkCellLocatorInterpolatedVelocityField" },
+        { "class":"vtkCompositeInterpolatedVelocityField" },
+        { "class":"vtkInterpolatedVelocityField" },
+        { "class":"vtkModifiedBSPTree" },
+        { "class":"vtkParticleTracerBase" },
+        { "class":"vtkParticlePathFilter" },
+        { "class":"vtkStreamTracer" },
+        { "class":"vtkTemporalInterpolatedVelocityField" }
+      ],
+      "replace": [
+        { "path": "VTK/Filters/FlowPaths/module.cmake" },
+        { "path": "VTK/Filters/FlowPaths/CMakeLists.txt" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name":"vtkFiltersParallelFlowPaths",
+      "path":"VTK/Filters/ParallelFlowPaths",
+      "include":[
+        { "class":"vtkPStreamTracer" },
+        { "class":"vtkPParticleTracerBase" },
+        { "class":"vtkPParticlePathFilter" }
+      ],
+      "replace": [
+        { "path": "VTK/Filters/ParallelFlowPaths/module.cmake" },
+        { "path": "VTK/Filters/ParallelFlowPaths/CMakeLists.txt" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name":"vtkFiltersParallelDIY2",
+      "path":"VTK/Filters/ParallelDIY2",
+      "include":[
+        { "class":"vtkDIYAggregateDataSetFilter" },
+        { "class":"vtkPResampleToImage" },
+        { "class":"vtkPResampleWithDataSet" }
+      ],
+      "replace": [
+        { "path": "VTK/Filters/ParallelDIY2/module.cmake" },
+        { "path": "VTK/Filters/ParallelDIY2/CMakeLists.txt" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name":"vtkFiltersParallel",
+      "path":"VTK/Filters/Parallel",
+      "include":[
+        { "class":"vtkCollectPolyData" },
+        { "class":"vtkPPolyDataNormals" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name":"vtkFiltersProgrammable",
+      "path":"VTK/Filters/Programmable",
+      "include":[
+        { "class":"vtkProgrammableFilter" }
+      ],
+      "replace": [
+        { "path": "VTK/Filters/Programmable/module.cmake" },
+        { "path": "VTK/Filters/Programmable/CMakeLists.txt" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name":"vtkFiltersVerdict",
+      "path":"VTK/Filters/Verdict",
+      "include":[
+        { "class":"vtkCellQuality" },
+        { "class":"vtkCellSizeFilter" },
+        { "class":"vtkMatrixMathFilter" },
+        { "class":"vtkMeshQuality" }
+      ],
+      "replace": [
+        { "path": "VTK/Filters/Verdict/module.cmake" },
+        { "path": "VTK/Filters/Verdict/CMakeLists.txt" }
+      ],
+      "cswrap":false,
+      "pythonwrap":true
+    },
+    { "name":"vtkFiltersAMR",
+      "path":"VTK/Filters/AMR",
+      "include":[
+        { "class":"vtkParallelAMRUtilities" }
+      ],
+      "replace": [
+        { "path": "VTK/Filters/AMR/module.cmake" },
+        { "path": "VTK/Filters/AMR/CMakeLists.txt" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name":"vtkFiltersCore",
+      "path":"VTK/Filters/Core",
+      "include":[
+        { "class":"vtkCleanPolyData" },
+        { "class":"vtkCompositeDataProbeFilter" },
+        { "class":"vtkResampleToImage" },
+        { "class":"vtkResampleWithDataSet" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name":"vtkjsoncpp",
+      "path":"VTK/ThirdParty/jsoncpp",
+      "replace": [
+        { "path": "VTK/ThirdParty/jsoncpp/module.cmake" },
+        { "path": "VTK/ThirdParty/jsoncpp/CMakeLists.txt" },
+        { "path": "VTK/ThirdParty/jsoncpp/vtk_jsoncpp_fwd.h.in" },
+        { "path": "VTK/ThirdParty/jsoncpp/vtk_jsoncpp.h.in" },
+        { "path": "VTK/ThirdParty/jsoncpp/vtkjsoncpp/jsoncpp.cpp" },
+        { "path": "VTK/ThirdParty/jsoncpp/vtkjsoncpp/CMakeLists.txt" },
+        { "path": "VTK/ThirdParty/jsoncpp/vtkjsoncpp/json/json.h" },
+        { "path": "VTK/ThirdParty/jsoncpp/vtkjsoncpp/json/json-forwards.h" },
+        { "path": "VTK/ThirdParty/jsoncpp/vtkjsoncpp/json/vtkjsoncpp_config.h.in" }
+      ],
+      "cswrap":false,
+      "pythonwrap":false
+    },
+    { "name":"vtkverdict",
+      "path":"VTK/ThirdParty/verdict",
+      "replace": [
+        { "path": "VTK/ThirdParty/verdict/module.cmake" },
+        { "path": "VTK/ThirdParty/verdict/CMakeLists.txt" },
+        { "path": "VTK/ThirdParty/verdict/vtk_verdict.h" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/CMakeLists.txt" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/verdict_defines.hpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/verdict.h.in" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/verdict_mangle.h.in" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/VerdictVector.cpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/V_GaussIntegration.cpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/V_HexMetric.cpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/V_PyramidMetric.cpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/V_TetMetric.cpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/v_vector.h" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/V_EdgeMetric.cpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/verdict_test.cpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/VerdictVector.hpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/V_GaussIntegration.hpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/V_KnifeMetric.cpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/V_QuadMetric.cpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/V_TriMetric.cpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/V_WedgeMetric.cpp" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/README" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/Verdict.htm" },
+        { "path": "VTK/ThirdParty/verdict/vtkverdict/Verdict.doc" }
+      ],
+      "cswrap":false,
+      "pythonwrap":false
+    },
+    { "name":"vtkdiy2",
+      "path":"VTK/ThirdParty/diy2",
+      "replace": [
+        { "path": "VTK/ThirdParty/diy2/module.cmake" },
+        { "path": "VTK/ThirdParty/diy2/CMakeLists.txt" },
+        { "path": "VTK/ThirdParty/diy2/vtk_diy2.h.in" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/CMakeLists.txt" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/LEGAL.txt" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/LICENSE.txt" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/README.kitware.md" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/README.md" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/algorithms.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/collection.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/critical-resource.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/grid.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/log.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/mpi.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/pick.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/proxy.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/reduce-operations.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/serialization.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/storage.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/time.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/vertices.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/assigner.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/communicator.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/decomposition.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/link.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/master.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/no-thread.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/point.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/reduce.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/resolve.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/stats.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/thread.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/types.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/types.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/detail/block_traits.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/detail/traits.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/detail/algorithms/kdtree.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/detail/algorithms/kdtree-sampling.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/detail/algorithms/sort.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/detail/master/collectives.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/detail/master/commands.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/detail/master/communication.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/detail/master/execution.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/detail/reduce/all-to-all.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/fmt/format.cc" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/fmt/format.h" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/fmt/ostream.cc" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/fmt/ostream.h" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/io/block.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/io/bov.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/io/numpy.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/io/utils.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/mpi/collectives.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/mpi/communicator.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/mpi/constants.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/mpi/datatypes.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/mpi/io.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/mpi/no-mpi.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/mpi/operations.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/mpi/optional.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/mpi/point-to-point.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/mpi/request.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/mpi/status.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/mpi/window.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/partners/all-reduce.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/partners/broadcast.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/partners/common.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/partners/merge.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/partners/swap.hpp" },
+        { "path": "VTK/ThirdParty/diy2/vtkdiy2/include/vtkdiy2/thread/fast_mutex.h" }
+      ],
+      "cswrap":false,
+      "pythonwrap":false
+    },
+    { "name":"vtkPVVTKExtensionsCore",
+      "path":"ParaViewCore/VTKExtensions/Core",
+      "include":[
+        { "class":"vtkFileSeriesReader" },
+        { "class":"vtkMetaReader" }
+      ],
+      "replace": [
+        { "path":"ParaViewCore/VTKExtensions/Core/module.cmake" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name":"vtkPVServerImplementationCore",
+      "path":"ParaViewCore/ServerImplementation/Core",
+      "include":[
+        { "class":"vtkSIMetaReaderProxy" }
+      ],
+      "cswrap":true,
+      "pythonwrap":true
+    },
+    { "name": "vtkIOXML",
+      "path": "VTK/IO/XML",
+      "include": [
+        { "class": "vtkXMLReader" },
+        { "class": "vtkXMLDataReader" },
+        { "class": "vtkXMLStructuredDataReader" },
+        { "class": "vtkXMLRectilinearGridReader" },
+        { "class": "vtkXMLStructuredGridReader" },
+        { "class": "vtkXMLImageDataReader" },
+        { "class": "vtkXMLPDataReader" },
+        { "class": "vtkXMLPDataObjectReader" },
+        { "class": "vtkXMLUnstructuredGridReader" },
+        { "class": "vtkXMLFileReadTester" },
+        { "class": "vtkXMLUnstructuredDataReader" },
+        { "class": "vtkXMLPUnstructuredDataReader" },
+        { "class": "vtkXMLPUnstructuredGridReader" }
+      ],
+      "replace": [
+        { "path": "VTK/IO/XML/module.cmake" },
+        { "path": "VTK/IO/XML/CMakeLists.txt" }
+      ],
+      "cswrap": true,
+      "pythonwrap": true
+    },
+    { "name":"OnlyUsedForReplacingFilesInWrapping",
+      "path":"Wrapping/Python/paraview",
+      "patches":[
+        { "path": "override_to_virtual.patch" },
+        { "path": "paraviewplugin.patch" }
+      ],
+      "replace": [
+        { "path":"Wrapping/Python/paraview/servermanager.py" },
+        { "path":"Wrapping/Python/paraview/pv-vtk-all.py" }
+      ],
+      "cswrap":false,
+      "pythonwrap":false
+    }
+  ],
+  "proxies":[
+    { "path":"ParaViewCore/ServerManager/SMApplication/Resources/filters.xml",
+      "proxies":[
+        "UnstructuredGradient",
+        "InSituParticlePath",
+        "ParticlePath",
+        "ArbitrarySourceStreamTracer",
+        "PolyDataNormals",
+        "ResampleWithDataset",
+        "ReductionFilter",
+        "ClientServerMoveData"
+      ]
+    },
+    { "path":"ParaViewCore/ServerManager/SMApplication/Resources/pythonfilter.xml",
+      "proxies":[
+        "PythonCalculator",
+        "ProgrammableFilter",
+        "ProgrammableSource"
+      ]
+    },
+    { "path":"ParaViewCore/ServerManager/SMApplication/Resources/sources.xml",
+      "proxies":[
+        "PointSource"
+      ]
+    },
+    { "path":"ParaViewCore/ServerManager/SMApplication/Resources/utilities.xml",
+      "proxies":[
+        "PluginLoader",
+        "StaticCellLocator",
+        "CellTreeLocator",
+        "CellLocator",
+        "ModifiedBSPTree",
+        "OBBTree"
+      ]
+    },
+    { "path":"ParaViewCore/ServerManager/SMApplication/Resources/readers.xml",
+      "proxies":[
+        "XMLPUnstructuredGridReader",
+        "XMLPUnstructuredGridReaderCore"
+      ]
+    }
+  ]
+}

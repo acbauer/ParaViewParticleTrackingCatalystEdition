@@ -1,0 +1,24 @@
+diff --git a/CMake/ParaViewPlugins.cmake b/CMake/ParaViewPlugins.cmake
+index 6e0600a..2b43311 100644
+--- a/CMake/ParaViewPlugins.cmake
++++ b/CMake/ParaViewPlugins.cmake
+@@ -1020,8 +1020,8 @@ FUNCTION(ADD_PARAVIEW_PLUGIN NAME VERSION)
+     ENDIF()
+     IF(SM_SRCS)
+       target_link_libraries(${NAME} LINK_PUBLIC vtkPVServerManagerApplication
+-        vtkPVAnimation
+-        vtkPVServerManagerDefault
++        #vtkPVAnimation commented out by acbauer
++        #vtkPVServerManagerDefault commented out by acbauer
+         vtkPVServerManagerApplicationCS)
+     ENDIF()
+ 
+@@ -1059,7 +1059,7 @@ MACRO(WRAP_PLUGIN_FOR_PYTHON NAME WRAP_LIST WRAP_EXCLUDE_LIST)
+   SET(Kit_PYTHON_EXTRA_SRCS)
+ 
+   SET(KIT_PYTHON_LIBS
+-    vtkPVServerManagerCorePythonD
++    #vtkPVServerManagerCorePythonD commented out by acbauer
+     ${NAME})
+ 
+   # Tell vtkWrapPython.cmake to set VTK_PYTHON_LIBRARIES for us.

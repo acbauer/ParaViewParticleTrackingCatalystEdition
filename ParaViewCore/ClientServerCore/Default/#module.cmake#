@@ -1,0 +1,13 @@
+  DEPENDS
+    #vtkPVVTKExtensionsDefault
+    vtkFiltersProgrammable
+    vtkPVClientServerCoreCore
+  PRIVATE_DEPENDS
+    vtksys
+  TEST_DEPENDS
+    vtkTestingCore
+  TEST_LABELS
+    PARAVIEW
+  KIT
+    vtkPVClientServer
+)

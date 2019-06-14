@@ -1,0 +1,13 @@
+vtk_module(vtkPVClientServerCoreRendering
+  GROUPS
+    ParaViewRendering
+  DEPENDS
+    vtkPVClientServerCoreCore
+    vtkCommonDataModel
+    vtkIOLegacy
+    vtkPVVTKExtensionsCore
+  TEST_LABELS
+    PARAVIEW
+  KIT
+    vtkPVClientServer
+)

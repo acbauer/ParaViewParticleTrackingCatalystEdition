@@ -19,17 +19,7 @@
         "value":"ON"
       },
       {
-        "name":"Module_vtkPVClientServerCoreDefault",
-        "type":"BOOL",
-        "value":"ON"
-      },
-      {
         "name":"Module_vtkPVClientServerCoreCore",
-        "type":"BOOL",
-        "value":"ON"
-      },
-      {
-        "name":"Module_vtkPVClientServerCoreRendering",
         "type":"BOOL",
         "value":"ON"
       },
@@ -107,31 +97,6 @@
     ]
   },
   "modules":[
-    { "name":"vtkPVClientServerCoreDefault",
-      "path":"ParaViewCore/ClientServerCore/Default",
-      "include":[
-        { "class":"vtkPythonCalculator" }
-      ],
-      "replace": [
-        { "path":"ParaViewCore/ClientServerCore/Default/vtkPythonCalculator.h" },
-        { "path":"ParaViewCore/ClientServerCore/Default/module.cmake" },
-        { "path":"ParaViewCore/ClientServerCore/Default/CMakeLists.txt" }
-      ],
-      "cswrap":true,
-      "pythonwrap":true
-    },
-    { "name":"vtkPVClientServerCoreRendering",
-      "path":"ParaViewCore/ClientServerCore/Rendering",
-      "include":[
-        { "class":"vtkClientServerMoveData" }
-      ],
-      "replace": [
-        { "path":"ParaViewCore/ClientServerCore/Rendering/module.cmake" },
-        { "path":"ParaViewCore/ClientServerCore/Rendering/CMakeLists.txt" }
-      ],
-      "cswrap":true,
-      "pythonwrap":false
-    },
     { "name":"vtkPVVTKExtensionsDefault",
       "path":"ParaViewCore/VTKExtensions/Default",
       "include":[
@@ -155,6 +120,18 @@
         { "path":"ParaViewCore/VTKExtensions/Rendering/CMakeLists.txt" }
       ],
       "cswrap":false,
+      "pythonwrap":false
+    },
+    { "name":"vtkPVClientServerCoreCore",
+      "path":"ParaViewCore/ClientServerCore/Core",
+      "replace": [
+        { "path":"ParaViewCore/ClientServerCore/Core/vtkClientServerMoveData.cxx" },
+        { "path":"ParaViewCore/ClientServerCore/Core/vtkClientServerMoveData.h" },
+        { "path":"ParaViewCore/ClientServerCore/Core/vtkPythonCalculator.cxx" },
+        { "path":"ParaViewCore/ClientServerCore/Core/vtkPythonCalculator.h" },
+        { "path":"ParaViewCore/ClientServerCore/Core/CMakeLists.txt" }
+      ],
+      "cswrap":true,
       "pythonwrap":false
     },
     { "name":"vtkFiltersSources",
@@ -502,7 +479,8 @@
         "PolyDataNormals",
         "ResampleWithDataset",
         "ReductionFilter",
-        "ClientServerMoveData"
+        "ClientServerMoveData",
+        "ReductionFilter"
       ]
     },
     { "path":"ParaViewCore/ServerManager/SMApplication/Resources/pythonfilter.xml",

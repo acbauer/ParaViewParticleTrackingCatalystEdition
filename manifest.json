@@ -1,5 +1,5 @@
 {
-  "edition": "Helios",
+  "edition": "ParticleTracking",
   "requires": [
     "Extras"
   ],

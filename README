@@ -1,0 +1,54 @@
+The general concept of creating a Catalyst edition is described at:
+* https://blog.kitware.com/paraview-catalyst-editions-what-are-they/
+* In Chapter 4 of the ParaView Catalyst User's Guide (https://www.paraview.org/files/catalyst/docs/ParaViewCatalystUsersGuide_v2.pdf) which should
+  also be available at https://www.paraview.org/in-situ/
+
+The main idea is to significantly reduce the library size and/or dependencies (e.g. OpenGL) of ParaView. Normally this nearly impossible without
+a very large amount of work but with Catalyst editions this is possible. There are already several Catalyst editions available with varying levels
+of functionality (and thus library size and dependencies).
+
+To use this edition of ParaView Catalyst, you must check out ParaView 5.6.1 from the git repository (the stand-alone ParaView 5.6.1 source code isn't
+sufficient as git information is needed). It is suggested to check out this repo as ParaViewParticleTrackingCatalystEdition under the Catalyst/Editions
+subdirectory of the ParaView source code for the following directions. To generate the Catlyst edition source code, the following command needs to
+be done from the Catalyst subdirectory:
+python catalyze.py -i Editions/Base/ -i Editions/Enable-Python/ -i Editions/Essentials/ -i Editions/Extras/ -i Editions/ParaViewParticleTrackingCatalystEdition/ -o <destination of catalyzed source code>
+
+Note that this will delete all previous files in <destination of catalyzed source code> before putting the new files in there. Once that has been done,
+the CMake configure process is a little different than the "normal" ParaView CMake configuration process. There is a cmake.sh script that should
+be used for this. From a separate build directory, the following command would be done:
+<destination of catalyzed source code>/cmake.sh <destination of catalyzed source code>
+
+Note that CMake options can also be added here or that CCMake or CMake-GUI can be used after this to adjust settings though that could
+potentially mess up previously configured settings from cmake.sh. For example, to create a build with a specific C++ compiler the following
+would be done:
+<destination of catalyzed source code>/cmake.sh -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++ <destination of catalyzed source code>
+
+
+While the above information lets people know how to create a Catalyst edition and build it, it could be better at explaining how to add
+new functionality to an existing edition. This explanation is assuming that you're trying to access the functionality through ParaView's
+Python API (i.e. through the importing paraview.simple). First is finding the C++ class from the Python name. This is done with the XML
+files in ParaViewCore/ServerManager/SMApplication/Resources subdirectory of the full source code. Note that the Python API name is derived
+from the 'label' XML attribute. For example, for the MergeBlocks filter the definition is in filters.xml:
+    <SourceProxy class="vtkDataObjectTreeToPointSetFilter"
+                 label="Merge Blocks"
+                 name="MergeBlocks">
+
+The 'Merge Blocks' string gets reduced to MergeBlocks in the Python API. When we add this to the manifest.json file we use the name attribute,
+which is 'MergeBlocks'. Note though that there's no requirement that label value be condensed down to name value. Then we need to add in the
+class value, i.e. the vtkDataObjectTreeToPointSetFilter class and any dependent classes and we have to look through the source code to find
+where that is and add it in accordingly. In a couple of rare instances I've had to move where these classes are located (i.e. what module they
+are located in) due to module dependencies with CMake. I probably could have tried to figure out how to fix that but it seemed more trouble
+than it was worth to try and fix. When I did this I needed to go into the header file and change the export macro stuff which would be
+vtkPVVTKExtensionsRenderingModule.h and VTKPVVTKEXTENSIONSRENDERING_EXPORT for the vtkDataObjectTreeToPointSetFilter.h header file:
+--------------------------------------------------------------------------
+#include "vtkPVVTKExtensionsRenderingModule.h" // For export macro
+
+class VTKPVVTKEXTENSIONSRENDERING_EXPORT vtkDataObjectTreeToPointSetFilter
+  : public vtkPointSetAlgorithm
+--------------------------------------------------------------------------
+
+In this case I would just make this a "replaced" file in the manifest.json file. See vtkPythonCalculator or vtkClientServerMoveData in
+manifest.json where I did that.
+
+Finally, note that ParaView 5.7 is not expected to support Catalyst editions at all and ParaView 5.8 will have a better solution.
+See https://discourse.paraview.org/t/catalyst-edition-status-in-5-7-and-5-8/1510.

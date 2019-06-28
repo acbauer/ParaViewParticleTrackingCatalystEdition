@@ -193,6 +193,9 @@
         { "class":"vtkStreamTracer" },
         { "class":"vtkTemporalInterpolatedVelocityField" }
       ],
+      "patches":[
+        { "path": "particle_path.patch" }
+      ],
       "replace": [
         { "path": "VTK/Filters/FlowPaths/module.cmake" },
         { "path": "VTK/Filters/FlowPaths/CMakeLists.txt" }
@@ -206,6 +209,9 @@
         { "class":"vtkPStreamTracer" },
         { "class":"vtkPParticleTracerBase" },
         { "class":"vtkPParticlePathFilter" }
+      ],
+      "patches":[
+        { "path": "parallel_particle_path.patch" }
       ],
       "replace": [
         { "path": "VTK/Filters/ParallelFlowPaths/module.cmake" },

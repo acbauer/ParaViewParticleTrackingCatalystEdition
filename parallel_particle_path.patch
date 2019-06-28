@@ -1,0 +1,13 @@
+diff --git a/VTK/Filters/ParallelFlowPaths/vtkPParticleTracerBase.cxx b/VTK/Filters/ParallelFlowPaths/vtkPParticleTracerBase.cxx
+index 9305b51..5c51a6c 100644
+--- a/VTK/Filters/ParallelFlowPaths/vtkPParticleTracerBase.cxx
++++ b/VTK/Filters/ParallelFlowPaths/vtkPParticleTracerBase.cxx
+@@ -446,8 +446,6 @@ bool vtkPParticleTracerBase::UpdateParticleListFromOtherProcesses()
+   for(size_t i=0;i<received.size();i++)
+   {
+     RemoteParticleInfo& info(received[i]);
+-    info.Current.UniqueParticleId++;
+-    info.Previous.UniqueParticleId++;
+     info.Current.PointId = -1;
+     info.Current.CachedDataSetId[0] = info.Current.CachedDataSetId[1] = -1;
+     info.Current.CachedCellId[0] = info.Current.CachedCellId[1] = -1;

@@ -1,14 +1,10 @@
-set (__dependencies)
-if (PARAVIEW_USE_MPI)
-  set (__dependencies
-    vtkParallelMPI
-    )
-endif()
-
 vtk_module(vtkPVVTKExtensionsRendering
   DEPENDS
     ${__dependencies}
     vtkCommonExecutionModel
+    vtkFiltersCore
+    vtkParallelMPI
+    vtkPVVTKExtensionsCore
 
   TEST_DEPENDS
     vtkInteractionStyle

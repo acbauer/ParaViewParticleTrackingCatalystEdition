@@ -131,6 +131,9 @@
         { "path":"ParaViewCore/ClientServerCore/Core/vtkPythonCalculator.h" },
         { "path":"ParaViewCore/ClientServerCore/Core/CMakeLists.txt" }
       ],
+      "patches":[
+        { "path": "complete_arrays.patch" }
+      ],
       "cswrap":true,
       "pythonwrap":false
     },

@@ -1,0 +1,77 @@
+diff --git a/ParaViewCore/ClientServerCore/Core/vtkCompleteArrays.cxx b/ParaViewCore/ClientServerCore/Core/vtkCompleteArrays.cxx
+index bd9aa0927e3cbd2807f58efa460e74c61c918a83..73007fe92a15eb18e4fb2dbc5ccf7c907832039f 100644
+--- a/ParaViewCore/ClientServerCore/Core/vtkCompleteArrays.cxx
++++ b/ParaViewCore/ClientServerCore/Core/vtkCompleteArrays.cxx
+@@ -26,6 +26,7 @@
+ #include "vtkPVArrayInformation.h"
+ #include "vtkPointData.h"
+ #include "vtkPointSet.h"
++#include "vtkRectilinearGrid.h"
+ #include "vtkTable.h"
+ 
+ // this doesn't directly use vtkPVDataSetAttributesInformation since
+@@ -296,8 +297,7 @@ int vtkCompleteArrays::RequestData(
+ 
+     vtkDeserialize(css, 0, outputDS->GetPointData());
+     vtkDeserialize(css, 1, outputDS->GetCellData());
+-    vtkPointSet* ps = vtkPointSet::SafeDownCast(outputDS);
+-    if (ps)
++    if (vtkPointSet* ps = vtkPointSet::SafeDownCast(outputDS))
+     {
+       vtkNew<vtkPoints> pts;
+       int dataType;
+@@ -307,6 +307,39 @@ int vtkCompleteArrays::RequestData(
+       }
+       ps->SetPoints(pts.Get());
+     }
++    else if (auto rg = vtkRectilinearGrid::SafeDownCast(outputDS))
++    {
++      rg->SetXCoordinates(nullptr);
++      rg->SetYCoordinates(nullptr);
++      rg->SetZCoordinates(nullptr);
++
++      int dataType;
++      if (css.GetArgument(2, 0, &dataType) && dataType != VTK_VOID)
++      {
++        if (auto array = vtkAbstractArray::CreateArray(dataType))
++        {
++          rg->SetXCoordinates(vtkDataArray::SafeDownCast(array));
++          array->FastDelete();
++        }
++      }
++
++      if (css.GetArgument(2, 1, &dataType) && dataType != VTK_VOID)
++      {
++        if (auto array = vtkAbstractArray::CreateArray(dataType))
++        {
++          rg->SetYCoordinates(vtkDataArray::SafeDownCast(array));
++          array->FastDelete();
++        }
++      }
++      if (css.GetArgument(2, 2, &dataType) && dataType != VTK_VOID)
++      {
++        if (auto array = vtkAbstractArray::CreateArray(dataType))
++        {
++          rg->SetZCoordinates(vtkDataArray::SafeDownCast(array));
++          array->FastDelete();
++        }
++      }
++    }
+   }
+   else if (myProcId == infoProc)
+   {
+@@ -319,6 +352,14 @@ int vtkCompleteArrays::RequestData(
+       css << vtkClientServerStream::Reply << ps->GetPoints()->GetDataType()
+           << vtkClientServerStream::End;
+     }
++    else if (auto rg = vtkRectilinearGrid::SafeDownCast(inputDS))
++    {
++      css << vtkClientServerStream::Reply
++          << (rg->GetXCoordinates() ? rg->GetXCoordinates()->GetDataType() : VTK_VOID)
++          << (rg->GetYCoordinates() ? rg->GetYCoordinates()->GetDataType() : VTK_VOID)
++          << (rg->GetZCoordinates() ? rg->GetZCoordinates()->GetDataType() : VTK_VOID)
++          << vtkClientServerStream::End;
++    }
+ 
+     size_t length;
+     const unsigned char* data;

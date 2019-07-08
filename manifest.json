@@ -524,6 +524,8 @@
     },
     { "path":"ParaViewCore/ServerManager/SMApplication/Resources/readers.xml",
       "proxies":[
+        "XMLPImageDataReader",
+        "XMLPImageDataReaderCore",
         "XMLPUnstructuredGridReader",
         "XMLPUnstructuredGridReaderCore"
       ]
